@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Science Fair Project Site</title>
+
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #e8f4ff;
+}
+
+        h1 {
+            font-size: 35px;
+        }
+
+        section {
+            margin: 25px auto;
+            padding: 20px;
+            max-width: 900px;
+            border: 2px solid black;
+        }
+
+        #time {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #projectText {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #car {
+            position: relative;
+            left: 0px;
+            width: 100px;
+        }
+
+        #road {
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        li {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🔬 SCIENCE FAIR PROJECT SITE 🔬</h1>
+    <p>JavaScript Timer Functions, Events and Arrays</p>
+
+
+    <!-- QUESTION 1 -->
+    <section>
+
+        <h2>1. Digital Clock</h2>
+
+        <span id="time"></span>
+
+        <script>
+
+            function displayTime() {
+
+                var d = new Date();
+
+                var hour = d.getHours();
+                var minute = d.getMinutes();
+                var second = d.getSeconds();
+
+                hour = String(hour).padStart(2, "0");
+                minute = String(minute).padStart(2, "0");
+                second = String(second).padStart(2, "0");
+
+                document.getElementById("time").innerHTML =
+                    hour + ":" + minute + ":" + second;
+            }
+
+            displayTime();
+
+            setInterval(displayTime, 1000);
+
+        </script>
+
+    </section>
+
+
+
+    <!-- QUESTION 2 -->
+    <section>
+
+        <h2>2. Dynamic Science Fair Background</h2>
+
+        <p>
+            The background colour changes automatically every 30 seconds.
+        </p>
+
+        <script>
+
+            function setBackgroundColor() {
+
+                var red = Math.floor(Math.random() * 256);
+                var green = Math.floor(Math.random() * 256);
+                var blue = Math.floor(Math.random() * 256);
+
+                var color =
+                    "rgb(" + red + "," + green + "," + blue + ")";
+
+                document.body.style.backgroundColor = color;
+            }
+
+            setInterval(setBackgroundColor, 30000);
+
+        </script>
+
+    </section>
+
+
+
+    <!-- QUESTION 3 -->
+    <section>
+
+        <h2>3. Change Font Size</h2>
+
+        <p id="projectText"
+           onmouseover="incSize()"
+           onmouseout="decSize()">
+
+            Move your mouse over this paragraph to zoom in
+            and move it away to zoom out.
+            <br><br>
+            🔬 Explore the Amazing Science Fair Projects! 🔬
+
+        </p>
+
+        <script>
+
+            function incSize() {
+
+                document.getElementById("projectText")
+                .style.fontSize = "30px";
+
+            }
+
+            function decSize() {
+
+                document.getElementById("projectText")
+                .style.fontSize = "20px";
+
+            }
+
+        </script>
+
+    </section>
+
+
+
+    <!-- QUESTION 4 -->
+    <section>
+
+        <h2>4. Moving Science Fair Car</h2>
+
+        <div id="road">
+
+            <img id="car"
+                 alt="Science Fair Car"
+                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='60'%3E%3Crect x='10' y='25' width='75' height='25' fill='blue'/%3E%3Crect x='25' y='10' width='40' height='25' fill='lightblue'/%3E%3Ccircle cx='25' cy='50' r='8' fill='black'/%3E%3Ccircle cx='70' cy='50' r='8' fill='black'/%3E%3C/svg%3E">
+
+        </div>
+
+        <button onclick="moveRight()">MOVE</button>
+
+        <button onclick="stop()">STOP</button>
+
+        <script>
+
+            var imgObj;
+            var animate;
+
+            function init() {
+
+                imgObj = document.getElementById("car");
+
+                imgObj.style.position = "relative";
+                imgObj.style.left = "0px";
+
+            }
+
+            function moveRight() {
+
+                imgObj.style.left =
+                    parseInt(imgObj.style.left) + 5 + "px";
+
+                animate = setTimeout(moveRight, 20);
+
+            }
+
+            function stop() {
+
+                clearTimeout(animate);
+
+            }
+
+            window.onload = init;
+
+        </script>
+
+    </section>
+
+
+
+    <!-- QUESTION 5 -->
+    <section>
+
+        <h2>5. Science Fair Student Details</h2>
+
+        <div id="students"></div>
+
+        <script>
+
+            // Create an array of objects
+
+            var students = [
+
+                {
+                    name: "Ananya",
+                    regno: "SF202601",
+                    year: 2004
+                },
+
+                {
+                    name: "Rahul",
+                    regno: "SF202602",
+                    year: 1999
+                },
+
+                {
+                    name: "Meera",
+                    regno: "SF202603",
+                    year: 2002
+                },
+
+                {
+                    name: "Arjun",
+                    regno: "SF202604",
+                    year: 1998
+                }
+
+            ];
+
+
+            // Display student details
+
+            var output = "<ul>";
+
+            for (var i = 0; i < students.length; i++) {
+
+                output +=
+                    "<li>" +
+                    students[i].name +
+                    "'s Register Number is " +
+                    students[i].regno +
+                    " and Birth Year is " +
+                    students[i].year;
+
+                // Categorize students
+
+                if (students[i].year < 2000) {
+
+                    output += " - Born before 2000";
+
+                } else {
+
+                    output += " - Born after 2000";
+
+                }
+
+                output += "</li>";
+
+            }
+
+            output += "</ul>";
+
+            document.getElementById("students").innerHTML = output;
+
+        </script>
+
+    </section>
+
+
+</body>
+</html>
